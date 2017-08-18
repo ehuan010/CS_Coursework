@@ -1,0 +1,41 @@
+one pass1
+two pass2
+three pass3
+four pass4
+end
+one
+wrongpass
+wrongone
+pass1
+one
+pass1
+d
+n
+sub test 1
+bod test 1
+n
+sub test 2
+bod test 2
+r
+1
+rep test 3
+n
+sub test 4
+bod test 4
+d
+r
+1
+rep test 5
+r
+3
+2
+rep test 6
+d
+n
+sub test 7
+bod test 7
+r
+4
+rep test 8
+d
+q

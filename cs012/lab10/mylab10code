@@ -1,0 +1,71 @@
+  erase
+  
+  if(pos >= size)
+  {
+    exit(0);
+  }
+  IntNode *iterator = head;
+  IntNode *temp;
+  for(unsigned i = 0; i < pos; ++i)
+  {
+    iterator = iterator->next;
+    if(i+1 == pos)
+    {
+      iterator->next = temp;
+    }
+  }
+  
+  temp = iterator->next;
+  delete iterator;
+  
+  
+  
+  
+  insert
+  
+  
+    if(pos >= size)
+  {
+    exit(0);
+  }
+  IntNode *iterator = head;
+  for(unsigned i = 0; i < pos; ++i)
+  {
+    iterator = iterator->next;
+  }
+  if(pos != 0)
+  {
+    IntNode *temp = new IntNode(data);
+    temp->next = iterator->next;
+    iterator->next = temp;
+  }
+  else
+  {
+    IntNode *temp = new IntNode(data);
+    head = temp;
+    temp->next = iterator;
+  }
+  size++;
+  
+  
+  
+  push back
+  
+  
+  
+    IntNode *temp = new IntNode(data);
+  temp->next = NULL;
+  IntNode *it = head;
+  if(it != NULL)
+  {
+    while(it->next != NULL)
+    {
+      it = it->next;
+    }
+    it->next = temp;
+  }
+  else
+  {
+    head = temp;
+  }
+  size++;

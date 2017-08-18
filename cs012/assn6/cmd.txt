@@ -1,0 +1,24 @@
+one
+pass1
+d
+n
+test message with a new subject
+test with a multiple line body
+another line of body
+one more line
+
+r
+14
+8
+Just a single line reply to 8
+
+r
+12
+This is a reply to message 12 which itself is a reply.
+Another line which is a part of this reply.
+Lets add one more line.
+Done, this is the last one.
+
+d
+q
+

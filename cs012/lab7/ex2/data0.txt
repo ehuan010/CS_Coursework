@@ -1,0 +1,10 @@
+<begin_message>
+     :id: 3
+     :subject: This is the subject
+     :from: messi
+     :children: 5 6 
+     :body: the body has two lines this is the first line.
+and this is the second line.
+this is the third;
+and forth.
+<end>
