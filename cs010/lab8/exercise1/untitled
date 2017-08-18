@@ -1,0 +1,64 @@
+    #include "instinct.h"
+    #include <iostream>
+    using namespace std;
+    //Lab 8 Constants
+    double BLOCK_SIZE = 1.25;
+    int NUM_FRAMES = 4;
+    double FRAME_WIDTH = BLOCK_SIZE / (2 * NUM_FRAMES + 1);
+    double FRAME_X = 0.0;
+    double FRAME_Y = 0.0;
+    void new_layer()
+    {
+        FRAME_X += FRAME_WIDTH;
+        FRAME_Y += FRAME_WIDTH;
+        BLOCK_SIZE -= (2*FRAME_WIDTH);
+        
+    }
+    int instinct_main()
+    {
+        Rect frame = Rect(Point(FRAME_X,FRAME_Y), BLOCK_SIZE, BLOCK_SIZE);
+        
+        Rect left_inner_r = Rect(Point(FRAME_X,(FRAME_Y+FRAME_WIDTH)), FRAME_WIDTH, 
+                                 (BLOCK_SIZE - FRAME_WIDTH));
+        
+        Rect top_inner_r = Rect(Point((FRAME_X+FRAME_WIDTH),(FRAME_Y+(BLOCK_SIZE-FRAME_WIDTH))),
+                                (BLOCK_SIZE-FRAME_WIDTH),FRAME_WIDTH);
+        
+        Rect right_inner_r  = Rect(Point((FRAME_X+(BLOCK_SIZE-FRAME_WIDTH)),(FRAME_Y)),
+                                  FRAME_WIDTH,(BLOCK_SIZE-FRAME_WIDTH));
+        
+        Rect bot_inner_r = Rect(Point(FRAME_X,FRAME_Y),(BLOCK_SIZE - FRAME_WIDTH), 
+                                 FRAME_WIDTH);
+        
+        win << frame << top_inner_r << bot_inner_r << right_inner_r  
+            << left_inner_r;
+        
+        win.output_buffer();
+        
+        for(int i = 1 ; i <= NUM_FRAMES ; i++)
+        {
+            new_layer();
+            
+            frame = Rect(Point(FRAME_X,FRAME_Y), BLOCK_SIZE, BLOCK_SIZE);
+            
+            left_inner_r = Rect(Point(FRAME_X,(FRAME_Y+FRAME_WIDTH)), FRAME_WIDTH, 
+                                     (BLOCK_SIZE - FRAME_WIDTH));
+            
+            top_inner_r = Rect(Point((FRAME_X+FRAME_WIDTH),(FRAME_Y+(BLOCK_SIZE-FRAME_WIDTH))),
+                                    (BLOCK_SIZE-FRAME_WIDTH),FRAME_WIDTH);
+            
+            right_inner_r  = Rect(Point((FRAME_X+(BLOCK_SIZE-FRAME_WIDTH)),(FRAME_Y)),
+                                      FRAME_WIDTH,(BLOCK_SIZE-FRAME_WIDTH));
+            
+            bot_inner_r = Rect(Point(FRAME_X,FRAME_Y),(BLOCK_SIZE - FRAME_WIDTH), 
+                                     FRAME_WIDTH);
+            
+            win << frame << top_inner_r << bot_inner_r << right_inner_r  
+                << left_inner_r;
+            
+            win.output_buffer();
+        }
+        
+        
+        return 0;
+    }
