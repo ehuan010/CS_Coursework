@@ -1,0 +1,133 @@
+/*
+ * vector_demo.cpp
+ *
+ *  Created on: Oct 3, 2012
+ *      Author: Yehdhih Moctar
+ */
+
+    #include <vector>
+    #include <iostream>
+	using namespace std;
+
+	void print( const vector<int>& v);
+	void reverse_print( const vector<int>& v);
+
+	int main()
+    {
+		//creates an integer vector v1
+		vector<int> v1;
+
+		//populate v1 with values 7 8 9
+		v1.push_back(7);
+		v1.push_back(8);
+		v1.push_back(9);
+
+		// print v1
+		cout <<"v1 = ";
+		print(v1);
+		// reverse print v1
+		cout <<"v1 reverse = ";
+		reverse_print(v1);
+
+		//creates another integer vector v2
+		vector<int> v2;
+
+		// populate v2 with some values
+		for(int i = 0; i < 5; ++i)
+		{
+			v2.push_back(i);
+		}
+		// v2 now contains 0 1 2 3 4
+
+		// print v2
+		cout <<"v2 = ";
+		print(v2);
+		// reverse print v2
+		cout <<"v2 reverse = ";
+		reverse_print(v2);
+
+		// creates an iterator for v2
+		vector<int>::iterator v2_iter = v2.begin() + 1;
+
+		// insert 99 before the second element:
+		v2_iter = v2.insert(v2_iter, 99);
+
+		// v contains 0 99 1 2 3 4
+		// v2_iter points to the inserted element
+
+		//insert the contents of v1 before the second element:
+		v2.insert(v2_iter, v1.begin(), v1.end());
+		// v2 contains 0 7 8 9 99 1 2 3 4
+
+		// print v2
+		cout <<"After inserting v1 into v2"<< endl;
+		cout <<"v2 = ";
+		print(v2);
+		// reverse print v2
+		cout <<"After inserting v1 into v2"<< endl;
+		cout <<"v2 reverse = ";
+		reverse_print(v2);
+
+
+		v2_iter = v2.begin() + 3;
+		// v2_iter now points to the fourth element of v2
+
+		// insert three time -1 before the fourth element:
+		v2.insert(v2_iter, 3, -1);
+		// v2 contains 0 7 8 -1 -1 -1 9 99 1 2 3 4
+
+
+		// erase the fifth element of v2
+		v2_iter = v2.begin() + 4;
+		v2.erase(v2_iter);
+		// v2 contains 0 7 8 -1 -1 9 99 1 2 3 4
+
+		// print v2
+		cout <<"After erasing the fifth element of v2"<< endl;
+		cout <<"v2 = ";
+		print(v2);
+		// reverse print v2
+		cout <<"After erasing the fifth element of v2"<< endl;
+		cout <<"v2 reverse = ";
+		reverse_print(v2);
+
+		// erase the second to the fifth element:
+		v2_iter = v2.begin() + 1;
+		v2.erase(v2_iter, v2_iter + 4);
+		// v2 contains 0 9 99 1 2 3 4
+
+		// print v2
+		cout <<"After erasing the second to the fifth element of v2"<< endl;
+		cout <<"v2 = ";
+		print(v2);
+		// reverse print v2
+		cout <<"After erasing the second to the fifth element of v2"<< endl;
+		cout <<"v2 reverse = ";
+		reverse_print(v2);
+
+		// clear all of v2's elements
+		v2.clear();
+
+		return 0;
+    }
+
+    void print( const vector<int>& v)
+    {
+    	for(int i = 0; i < v.size(); ++i)
+    		cout << v[i] << " ";
+
+    	cout << endl;
+    	cout << "----------------"<<endl;
+
+    }
+
+	void reverse_print( const vector<int>& v)
+    {
+		int first_element = 0;
+		for(int i = v.size() - 1; i >= first_element; --i)
+		{
+			cout << v[i] << " ";
+		}
+		cout << endl;
+		cout << "----------------"<< endl;
+    }

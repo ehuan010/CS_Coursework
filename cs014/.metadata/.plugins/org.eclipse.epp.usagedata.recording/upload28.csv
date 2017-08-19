@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294129545
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294131171
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349294132758
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294167932
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294192996
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294260536
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294274384
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.project.buildAll",1349294278093
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294278573
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294280752
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294289597
+executed,command,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.commands.RunLast",1349294290399
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294290795
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294291031
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349294295101
+error,log,,,"Error logged from Debug Core: ",1349294295545
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1349294300973
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349294304071
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.cut",1349294439441
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.paste",1349294441272
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.copy",1349294529525
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.copy",1349294532717
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.paste",1349294534972
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349294540596
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349294544817

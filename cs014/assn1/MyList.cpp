@@ -1,0 +1,151 @@
+/*
+ * MyList.cpp
+ *
+ *  Created on: Jan 9, 2010, edit Jun 30, 2012
+ *      Author: rusichr
+ */
+
+#include "MyList.h"
+#include <cstdlib>
+
+using namespace std;
+
+MyList::MyList(){ head = NULL; }
+
+/**
+ * Copy Constructor, deep copy
+ */
+MyList::MyList(const MyList& str){
+	this -> head = str.head;
+}
+
+/**
+ * Overloaded constructor, builds list from string& str
+ */
+MyList::MyList(const string& str){
+
+}
+
+/**
+ * Overloaded constructor, builds list from string literal str
+ */
+MyList::MyList(const char* str){
+
+}
+
+/**
+ * Overloaded assignment operator, deep copy
+ */
+MyList& MyList::operator=(const MyList& str){
+
+}
+
+/**
+ * Destructor
+ */
+MyList::~MyList(){
+
+}
+
+/**
+ * Inserts char value at the front of the list
+ */
+void MyList::push_front (char value){
+
+}
+
+/**
+ * Inserts char value at the back of the list
+ */
+void MyList::push_back(char value){
+ 
+}
+
+/**
+ * Removes the first node from MyList
+ */
+void MyList::pop_front(){
+}
+
+/**
+ *  Removes the last node from the MyList
+ */
+void MyList::pop_back(){
+}
+
+/**
+ *  This function switches the VALUES of the nodes at index i and j.
+ *  NOTE: If i or j is out of bounds this function should just return(void).
+ *  NOTE: To simplify your code check to make sure that i is less than j,
+ *  and if not, swap the values.
+ */
+void MyList::swap(int i, int j){
+}
+
+/**
+ * Inserts a node with value at position i
+ */
+void MyList::insert_at_pos(int i, char value){
+
+}
+
+/**
+ *  This function rearranges the list in reverse order.
+ */
+void MyList::reverse(){
+  if(head == NULL)
+    return;
+  else{
+    int loc_size = size();
+    for(int i = 0; i < loc_size/2; i++)
+      swap(i, loc_size -(i+1));
+  }
+}
+
+/**
+ * Counts the number of nodes in MyList
+ */
+int MyList::size()const{
+
+}
+
+/**
+ * Prints the contents of MyList
+ */
+void MyList::print()const{
+
+}
+
+/**
+ *  Finds the the first occurrence of the character c in this list.
+ *  Returns -1 if the character is not found.
+ */
+int MyList::find(char c)const{
+
+}
+
+/**
+ * Finds the the first occurrence of the MyList query_str MyList
+ * Returns -1 if the character is not found.
+ */
+int MyList::find(MyList& query_str)const{
+
+}
+
+/**
+ * Removes all instances of the '0' char.
+ * Used to test, not part of assn1 specs
+ */
+void MyList::remove_zeroes() {
+}
+
+/**
+ * Function concatenates str to this
+ */
+MyList MyList::operator+(const MyList& str){
+
+}
+
+char& MyList::operator[](const int i){
+
+}

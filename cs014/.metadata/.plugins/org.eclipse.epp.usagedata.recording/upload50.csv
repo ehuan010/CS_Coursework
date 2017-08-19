@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349407788103
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349407805209
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349407825969
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.project.buildAll",1349407827087
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407827599
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407830523
+executed,command,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.commands.RunLast",1349407831531
+error,log,,,"Error logged from Debug Core: ",1349407832428
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1349407834903
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349407844318
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349407875802
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.project.buildAll",1349407876869
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407877526
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407880213
+executed,command,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.commands.RunLast",1349407881142
+error,log,,,"Error logged from Debug Core: ",1349407881969
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349407917986
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.project.buildAll",1349407921282
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407921856
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349407924595
+executed,command,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.commands.RunLast",1349407925815
+error,log,,,"Error logged from Debug Core: ",1349407927204
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1349407929533
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349407938339
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1349407969581

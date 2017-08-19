@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.ui.workbench.texteditor,3.5.0.v20090603,"org.eclipse.ui.workbench.texteditor",1349407465694
+started,bundle,org.eclipse.update.configurator,3.3.0.v20090312,"org.eclipse.update.configurator",1349407465695
+started,bundle,org.eclipse.update.core,3.2.300.v20090525,"org.eclipse.update.core",1349407465695
+started,bundle,org.eclipse.update.scheduler,3.2.200.v20081127,"org.eclipse.update.scheduler",1349407465695
+os,sysinfo,,,"linux",1349407465700
+arch,sysinfo,,,"x86_64",1349407465700
+ws,sysinfo,,,"gtk",1349407465700
+locale,sysinfo,,,"en_US",1349407465701
+processors,sysinfo,,,"48",1349407465701
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1349407465701
+java.runtime.version,sysinfo,,,"1.6.0_14-b08",1349407465701
+java.specification.name,sysinfo,,,"Java Platform API Specification",1349407465701
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1349407465701
+java.specification.version,sysinfo,,,"1.6",1349407465701
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1349407465701
+java.version,sysinfo,,,"1.6.0_14",1349407465701
+java.vm.info,sysinfo,,,"mixed mode",1349407465701
+java.vm.name,sysinfo,,,"Java HotSpot(TM) 64-Bit Server VM",1349407465701
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1349407465701
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1349407465701
+java.vm.specification.version,sysinfo,,,"1.0",1349407465701
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1349407465701
+java.vm.version,sysinfo,,,"14.0-b16",1349407465701
+opened,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349407466947
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349407467196

@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290666391
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290799233
+executed,command,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.commands.DebugLast",1349290800753
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290801008
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290894208
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290894949
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290905147
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349290907106
+error,log,,,"Internal error logged from CDI Debug: ",1349290925042
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.DebugView",1349290926240
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.VariableView",1349291043211
+activated,perspective,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.DebugPerspective",1349291043507
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.BreakpointView",1349291043711
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.MemoryView",1349291043895
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.RegisterView",1349291043980
+opened,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.ModuleView",1349291044073
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349291044245
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349291044259
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349291047278
+activated,view,org.eclipse.debug.ui,3.5.1.v20090811_r351,"org.eclipse.debug.ui.VariableView",1349291047634
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349291054613
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1349291058564
+activated,editor,org.eclipse.cdt.ui,5.1.1.200909110608,"org.eclipse.cdt.ui.editor.CEditor",1349291058767
+executed,command,,,"AUTOGEN:::org.eclipse.cdt.debug.ui.CEditor.BreakpointRulerActions/org.eclipse.cdt.debug.ui.CEditor.RulerTobbleBreakpointAction",1349291071748
+executed,command,,,"AUTOGEN:::org.eclipse.cdt.debug.ui.CEditor.BreakpointRulerActions/org.eclipse.cdt.debug.ui.CEditor.RulerTobbleBreakpointAction",1349291072883
