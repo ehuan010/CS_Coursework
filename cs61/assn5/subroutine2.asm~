@@ -1,0 +1,109 @@
+.orig x3000
+
+LD R7, SUB_FINAL_SIGN_3600
+JSRR R7
+
+HALT
+;--------------------
+; Data Block for main
+;--------------------
+SUB_FINAL_SIGN_3600 .FILL x3600
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_FINAL_SIGN_3600
+; Input R1,R2: Two numbers stored in two different registers
+; Postcondition: Determines the sign of the final answer +/-
+; Return Value: R1 and R2 will hold their original value. R6 will hold the sign.
+
+.ORIG x3600
+
+;----------------------------------------------------------------------------------------------------
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_3600		; backup R0
+ ST R3, BACKUP_R3_3600		; backup R3
+ ST R4, BACKUP_R4_3600		; backup R4
+ ST R5, BACKUP_R5_3600		; backup R5
+ ;ST R6, BACKUP_R6_3600		; backup R6
+ ST R7, BACKUP_R7_3600		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R1, TEST
+LD R2, TEST2
+
+ST R1, FIRST_VALUE_2
+ST R2, SECOND_VALUE_2
+
+LD R1, FIRST_VALUE_2
+BRzp POSITIVE_VAL		; first is zero/positive
+BRn NEGATIVE_VAL		; first is negative
+
+; first is zero/pos
+POSITIVE_VAL
+ LD R2, SECOND_VALUE_2		
+ BRzp POSITIVE_RESULT		; first is zero/positive second is zero/positive = +
+ BRn NEGATIVE_RESULT		; first is zero/positive second is neative = -
+
+NEGATIVE_VAL
+ LD R2, SECOND_VALUE_2
+ BRzp NEGATIVE_RESULT		; first is negative second is zero/positive = -
+ BRn POSITIVE_RESULT		; first is negative second is negative = +
+
+POSITIVE_RESULT
+ LD R6, POSITIVE_SIGN
+ BRp FINAL_SIGN
+
+NEGATIVE_RESULT
+ LD R6, NEGATIVE_SIGN
+ BRp FINAL_SIGN
+
+FINAL_SIGN
+ ADD R0, R6, #0
+ OUT
+ ;LD R4, TEST3
+ ;NOT R1, R1
+ ;ADD R1, R1, #1
+ ;ADD R1, R1, R4
+ ;LD R0, TEST4
+ ;ADD R0, R1, #0
+ ;OUT
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_3600		; restore R0
+ LD R3, BACKUP_R3_3600		; restore R3
+ LD R4, BACKUP_R4_3600		; restore R4
+ LD R5, BACKUP_R5_3600		; restore R5
+ ;LD R6, BACKUP_R6_3600		; restore R6
+ LD R7, BACKUP_R7_3600		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_3600 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R3_3600 .BLKW #1
+BACKUP_R4_3600 .BLKW #1
+BACKUP_R5_3600 .BLKW #1
+;BACKUP_R6_3600 .BLKW #1
+BACKUP_R7_3600 .BLKW #1
+
+TEST .FILL #-2
+TEST2 .FILL #-5
+TEST3 .FILL #48
+TEST4 .FILL #0
+FIRST_VALUE_2 .FILL #0
+SECOND_VALUE_2 .FILL #0
+NEGATIVE_SIGN .FILL #45
+POSITIVE_SIGN .FILL #43
+
+
+;----------------------------------------------------------------------------------------------------
+
+.END

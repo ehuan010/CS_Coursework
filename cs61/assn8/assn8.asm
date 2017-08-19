@@ -1,0 +1,1201 @@
+;=================================================
+;
+; Name: <Huang, Edward>
+; Login id: ehuan010 (861026626)
+;
+; Assignment name: <assn 8>
+; Lab section: <024>
+; TA: Muzo Akbay
+;
+; I hereby certify that the contents of this file
+; are ENTIRELY my own original work.
+;
+;=================================================
+;------------
+; Main Code
+;------------
+.ORIG x3000
+
+START_OF_PROGRAM
+
+ LD R7, SUB_MENU_3200		; load R7 with (SUB_MENU_3200)
+ JSRR R7			; jump to SUB_MENU_3200
+
+CHECK_OPTION_CHOSEN
+ ADD R1, R1, #-1		; subtract 1 from R1
+ BRz CHOICE1			; if (R1 = 0) go to CHOICE1
+ ADD R1, R1, #1			; else turn R1 back to original value		
+
+ ADD R1, R1, #-2		; subtract 2 from R1
+ BRz CHOICE2			; if (R1 = 0) go to CHOICE2
+ ADD R1, R1, #2			; else turn R1 back to original value	
+
+ ADD R1, R1, #-3		; subtract 3 from R1
+ BRz CHOICE3			; if (R3 = 0) go to CHOICE3
+ ADD R1, R1, #3			; else turn R3 back to original value	
+
+ ADD R1, R1, #-4		; subtract 4 from R1
+ BRz CHOICE4			; if (R1 = 0) go to CHOICE4
+ ADD R1, R1, #4			; else turn R1 back to original value	
+
+ ADD R1, R1, #-5		; subtract 5 from R1
+ BRz CHOICE5			; if (R1 = 0) go to CHOICE5
+ ADD R1, R1, #5			; else turn R1 back to original value	
+
+ ADD R1, R1, #-6		; subtract 6 from R1
+ BRz CHOICE6			; if (R1 = 0) go to CHOICE6
+ ADD R1, R1, #6			; else turn R1 back to original value
+
+ ADD R1, R1, #-7		; subtract 7 from R1
+ BRz CHOICE7			; if (R1 = 0) go to CHOICE7
+ ADD R1, R1, #7			; else turn R1 back to original value
+
+CHOICE1
+ LD R7, SUB_ALL_MACHINES_BUSY_3400	; load R7 with (SUB_ALL_MACHINES_BUSY_3400)
+ JSRR R7				; jump to (SUB_ALL_MACHINES_BUSY_3400)
+ ; do stuff with the return value R2
+ ADD R2, R2, #0				; invoke NZP condition codes
+ BRp PRINT_BUSY				; if (R2 > 0) go to PRINT_BUSY
+ BRz PRINT_NOT_BUSY			; if (R2 = 0) go to PRINT_NOT_BUSY
+ 
+ PRINT_BUSY
+  LEA R0, ALL_BUSY_PRINT		; load R0 with 1st address of ALL_BUSY_PRINT
+  PUTS					; output ALL_BUSY_PRINT
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R0, TRUE				; load R0 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM
+
+ PRINT_NOT_BUSY
+  LEA R0, SOME_NOT_BUSY_PRINT		; load R0 with 1st address of SOME_NOT_BUSY_PRINT
+  PUTS					; output ALL_BUSY_PRINT
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM
+
+CHOICE2
+ LD R7, SUB_ALL_MACHINES_FREE_3600	; load R7 with (SUB_ALL_MACHINES_FREE_3600)
+ JSRR R7				; jump to (SUB_ALL_MACHINES_FREE_3600)
+ ; do stuff with the return value R2
+ ADD R2, R2, #0				; invoke NZP condition codes
+ BRp PRINT_FREE				; if (R2 > 0) go to PRINT_BUSY
+ BRz PRINT_NOT_FREE			; if (R2 = 0) go to PRINT_NOT_BUSY
+ 
+ PRINT_FREE
+  LEA R0, ALL_FREE_PRINT		; load R0 with 1st address of ALL_FREE_PRINT
+  PUTS					; output ALL_FREE_PRINT
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R0, TRUE				; load R0 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM
+
+ PRINT_NOT_FREE
+  LEA R0, SOME_NOT_FREE_PRINT		; load R0 with 1st address of SOME_NOT_FREE_PRINT
+  PUTS					; output SOME_NOT_FREE_PRINT
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM
+
+CHOICE3
+ LD R7, SUB_NUM_BUSY_MACHINES_3800
+ JSRR R7
+ LEA R0, THERE_ARE			; load R0 with the 1st address of THERE_ARE
+ PUTS					; output THERE_ARE
+ ; need to turn R2 into it's character equivalent first...
+ LD R7, SUB_PRINT_CHAR_4600		; load R0 with the 1st address of SUB_PRINT_CHAR_4600
+ JSRR R7				; output SUB_PRINT_CHAR_4600
+ LEA R0, MACHINES_BUSY			; load R0 with the 1st address of MACHINES_BUSY
+ PUTS					; output MACHINES_BUSY
+ LD R0, NEWLINE2			; load R0 with newline
+ OUT					; ouptput newline
+ OUT					; ouptput newline
+ LD R6, TRUE				; load R6 with #0
+ BRz START_OF_PROGRAM			; START_OF_PROGRAM
+
+CHOICE4
+ LD R7, SUB_NUM_FREE_MACHINES_4000
+ JSRR R7
+ LEA R0, THERE_ARE			; load R0 with the 1st address of THERE_ARE
+ PUTS					; output THERE_ARE
+ ; need to turn R2 into it's character equivalent first...
+ LD R7, SUB_PRINT_CHAR_4600		; load R0 with the 1st address of SUB_PRINT_CHAR_4600
+ JSRR R7				; output SUB_PRINT_CHAR_4600
+ LEA R0, MACHINES_FREE			; load R0 with the 1st address of MACHINES_FREE
+ PUTS					; output MACHINES_FREE
+ LD R0, NEWLINE2			; load R0 with newline
+ OUT					; ouptput newline
+ OUT					; ouptput newline
+ LD R6, TRUE				; load R6 with #0
+ BRz START_OF_PROGRAM			; START_OF_PROGRAM 
+
+CHOICE5
+ LD R7, SUB_GET_N_4800			; load R7 with address x4800
+ JSRR R7				; jump to x4800
+ LD R7, SUB_MACHINE_STATUS_4200		; load R7 with (SUB_MACHINE_STATUS_4200)
+ JSRR R7				; jump to (SUB_MACHINE_STATUS_4200)
+
+ ADD R2, R2, #0				; invokes NZP conditions
+ BRp FREE_MACHINE			; if (R2 > 0) then FREE_MACHINE
+ BRz BUSY_MACHINE			; if (R2 = 0) then BUSY_MACHINE
+
+ FREE_MACHINE
+  LEA R0, MACHINE
+  PUTS
+  LD R7, SUB_PRINT_CHAR_5000		
+  JSRR R7
+  LEA R0, FREE_PRINT
+  PUTS
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM 
+
+ BUSY_MACHINE
+  LEA R0, MACHINE
+  PUTS
+  LD R7, SUB_PRINT_CHAR_5000		
+  JSRR R7
+  LEA R0, BUSY_PRINT
+  PUTS
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM 
+
+
+CHOICE6
+ LD R7, SUB_FIRST_FREE_4400		; load R7 with (SUB_FIRST_FREE_4400)
+ JSRR R7				; jump to (SUB_FIRST_FREE_4400)
+ 
+ ADD R2, R2, #0				; invoke NZP conditions
+ BRzp NUM_OF_FREE			; if (R2 >= 0) go to NUM_OF_FREE
+ BRn NONE_ARE_FREE			; else go to NONE_ARE_FREE
+ 
+ NUM_OF_FREE
+  LEA R0, OPTION6_PRINT			
+  PUTS
+  LD R7, SUB_PRINT_CHAR_4600		; load R7 with (SUB_PRINT_CHAR_4600)
+  JSRR R7				; jump to (SUB_PRINT_CHAR_4600)
+  ; continues the program
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM 
+
+ NONE_ARE_FREE
+  LEA R0, OPTION6_PRINT2
+  PUTS
+  ; continues the program
+  LD R0, NEWLINE2			; load R0 with newline
+  OUT					; ouptput newline
+  OUT					; ouptput newline
+  LD R6, TRUE				; load R6 with #0
+  BRz START_OF_PROGRAM			; START_OF_PROGRAM 
+
+CHOICE7
+ LEA R0, GOODBYE		; load R0 with 1st address of GOODBYE
+ PUTS				; output GOODBYE
+ HALT				; halts the program
+
+;--------------------
+; Data Block for main
+;--------------------
+TRUE .FILL #0
+NEWLINE2 .FILL #10
+SUB_MENU_3200 .FILL x3200
+SUB_ALL_MACHINES_BUSY_3400 .FILL x3400
+SUB_ALL_MACHINES_FREE_3600 .FILL x3600
+SUB_NUM_BUSY_MACHINES_3800 .FILL x3800
+SUB_NUM_FREE_MACHINES_4000 .FILL x4000
+SUB_MACHINE_STATUS_4200 .FILL x4200
+SUB_FIRST_FREE_4400 .FILL x4400
+
+; helper functions
+SUB_PRINT_CHAR_4600 .FILL x4600
+SUB_GET_N_4800 .FILL x4800
+SUB_PRINT_CHAR_5000 .FILL x5000
+
+;1 and 2
+ALL_BUSY_PRINT .STRINGZ "All machines are busy"
+SOME_NOT_BUSY_PRINT .STRINGZ "Some machines are not busy" 
+ALL_FREE_PRINT .STRINGZ "All machines are free"
+SOME_NOT_FREE_PRINT .STRINGZ "Some machines are not free"
+
+;3 and 4
+THERE_ARE .STRINGZ "There are "
+MACHINES_BUSY .STRINGZ " machines busy"
+MACHINES_FREE .STRINGZ " machines free"
+
+;5
+MACHINE .STRINGZ "Machine "
+FREE_PRINT .STRINGZ " is free"
+BUSY_PRINT .STRINGZ " is busy"
+
+;6
+OPTION6_PRINT .STRINGZ "The first available machine is number "
+OPTION6_PRINT2 .STRINGZ "None available!"
+
+;7
+GOODBYE .STRINGZ "Goodbye!"
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_MENU_3200
+; Input: (None)
+; Postcondition: The subroutine has printed out numerical options, allowed the user to select an 
+;		 option, and returned the selected option.
+; Return Value (R1): The option selected: #1, #2, #3, #4, #5, #6, or #7 (no other return value allowed) 
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x3200
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_3200		; backup R0
+ ST R2, BACKUP_R2_3200		; backup R2
+ ST R3, BACKUP_R3_3200		; backup R3
+ ST R4, BACKUP_R4_3200		; backup R4
+ ST R5, BACKUP_R5_3200		; backup R5
+ ST R6, BACKUP_R6_3200		; backup R6
+ ST R7, BACKUP_R7_3200		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+MENU_START
+ LD R2, MENU			; load R2 with 1st address of MENU
+
+; loop to dereference R2 then OUT the char 1 by 1 until BRz...if BRn then quit the program
+PRINT_STRING_LOOP
+ 
+ LDR R0, R2, #0			; load R0 with value stored at R2
+; first check if it is zero or negative 
+ BRz INDENT			; if (R0 = 0) then go to INDENT
+ BRn GET_USER_RESPONSE		; if (R0 = -1) go to GET_USER_RESPONSE
+; if it isn't then output and increment counter
+ OUT				; output R0 character
+ ADD R2, R2, #1			; increment the pointer R2 to the next address
+; need anything for the BR statement?
+ ADD R0, R0, #0			; (do this to check it's value)
+ BRp PRINT_STRING_LOOP		; if (R0 > 0) then continue PRINT_STRING_LOOP
+
+INDENT
+ LD R0, NEWLINE1
+ OUT
+ ADD R2, R2, #1
+ BRp PRINT_STRING_LOOP
+
+; finished printing menu, now get the users response and makes sure there is valid input
+GET_USER_RESPONSE
+ LEA R0, RESPONSE		; load R0 with the 1st address of RESPONSE
+ PUTS				; output RESPONSE
+
+ GETC				; get character input from user
+ OUT				; output character
+
+ LD R5, VALIDATION1		; R5 <- m[VALIDATION1] = #-49
+ LD R6, VALIDATION2		; R6 <- m[VALIDATION2] = #-55
+
+ ADD R0, R0, R6			; subtract 55 to check upper bound
+ BRnz CHECK_NEXT		; > 55 will go to INVALID...<= to 57 go to CHECK_NEXT
+ BRp INVALID
+
+ CHECK_NEXT
+  NOT R6, R6			; convert -55 to
+  ADD R6, R6, #1		; + 55
+  ADD R0, R0, R6		; reload value of R0 into it's original
+  ADD R0, R0, R5		; subtract 49 to check lower bound
+  BRzp R1_FINAL_VALUE		; < 55 will go to INVALID...>= to 48 go to R1_FINAL_VALUE
+  BRn INVALID
+
+ INVALID
+  LD R0, NEWLINE1		; loads R0 with NEWLINE1
+  OUT				; outputs newline
+  LEA R0, FAILED_INPUT		; loads R0 with the 1st address of FAILED_INPUT
+  PUTS				; output FAILED_INPUT
+  LD R0, NEWLINE1		; load R0 with a newline
+  OUT				; output the newline
+  OUT				; output the newline
+  ADD R0, R0, #0		; used to invoke nzp condition codes
+  BRp MENU_START		; if (R0 > 0) then continue MENU_START (newline 10 is positive)
+
+ R1_FINAL_VALUE
+  NOT R5, R5			; convert -49 to
+  ADD R5, R5, #1		; + 49
+  ADD R0, R0, R5		; turn R0 back to initial value
+  LD R2, CHAR_TO_NUM		; loads R2 with #-48
+  ADD R0, R0, R2		; R0 <- R0 + R2 (char in R0 converted to dec equivalent)
+  ADD R1, R0, #0		; put contents of R0 into R1
+  BRp END_GET_RESPONSE		; if (R1 > 0) go to END_GET_RESPONSE
+
+END_GET_RESPONSE
+ LD R0, NEWLINE1		; load R0 with a newline
+ OUT				; output the newline
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_3200		; restore R0
+ LD R2, BACKUP_R2_3200		; restore R2
+ LD R3, BACKUP_R3_3200		; restore R3
+ LD R4, BACKUP_R4_3200		; restore R4
+ LD R5, BACKUP_R5_3200		; restore R5
+ LD R6, BACKUP_R6_3200		; restore R6
+ LD R7, BACKUP_R7_3200		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_3200 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R2_3200 .BLKW #1
+BACKUP_R3_3200 .BLKW #1
+BACKUP_R4_3200 .BLKW #1
+BACKUP_R5_3200 .BLKW #1
+BACKUP_R6_3200 .BLKW #1
+BACKUP_R7_3200 .BLKW #1
+
+MENU .FILL x5800
+CHAR_TO_NUM .FILL #-48
+NEWLINE1 .FILL #10
+VALIDATION1 .FILL #-49
+VALIDATION2 .FILL #-55
+FAILED_INPUT .STRINGZ "The character you entered was invalid!!!"
+RESPONSE .STRINGZ "Choose an option (1-7): "
+
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_ALL_MACHINES_BUSY_3400
+; Input: (None)
+; Postcondition: The subroutine has returned a value indicating whether all machines are busy
+; Return Value (R2): 1 if all machines are busy, 0 otherwise 
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x3400
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_3400		; backup R0
+ ST R1, BACKUP_R1_3400		; backup R1
+ ST R3, BACKUP_R3_3400		; backup R3
+ ST R4, BACKUP_R4_3400		; backup R4
+ ST R5, BACKUP_R5_3400		; backup R5
+ ST R6, BACKUP_R6_3400		; backup R6
+ ST R7, BACKUP_R7_3400		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R1, BUSYVECTOR1		; load R1 with x6000
+
+LDR R3, R1, #0			; R3 <- m[R1] (R3 will hold the BUSYNESS)
+LD R4, FIRST_BIT_1		; load R4 with x8000
+LD R6, COUNTER1			; load R6 with #16
+
+CHECK_IF_BUSY_LOOP
+ AND R5, R3, R4			; R5 <- R3 AND R4 (AND's R1 with R4 to see if it is x8000 or 0)
+ BRn SOME_MACHINE_FREE		; if (R5 < 0) then SOME_MACHINE_FREE
+ BRz LEFT_SHIFT_STILL_BUSY	; if (R5 = 0) then LEFT_SHIFT_STILL_BUSY
+
+LEFT_SHIFT_STILL_BUSY
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_IF_BUSY_LOOP		; if (R6 > 0) go to CHECK_IF_BUSY_LOOP
+ BRz ALL_MACHINES_BUSY		; if (R6 = 0) go to ALL_MACHINES_BUSY
+
+SOME_MACHINE_FREE
+ LD R2, FREE1			; load R2 with #0 because NOT all machines are busy
+ BRz END_ALL_BUSY_CHECK		; END_ALL_BUSY_CHECK
+
+ALL_MACHINES_BUSY
+ LD R2, BUSY1			; load R2 with #1 because all machines are busy
+ BRp END_ALL_BUSY_CHECK		; END_ALL_BUSY_CHECK
+
+END_ALL_BUSY_CHECK
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_3400		; restore R0
+ LD R1, BACKUP_R1_3400		; restore R1
+ LD R3, BACKUP_R3_3400		; restore R3
+ LD R4, BACKUP_R4_3400		; restore R4
+ LD R5, BACKUP_R5_3400		; restore R5
+ LD R6, BACKUP_R6_3400		; restore R6
+ LD R7, BACKUP_R7_3400		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_3400 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_3400 .BLKW #1
+BACKUP_R3_3400 .BLKW #1
+BACKUP_R4_3400 .BLKW #1
+BACKUP_R5_3400 .BLKW #1
+BACKUP_R6_3400 .BLKW #1
+BACKUP_R7_3400 .BLKW #1
+
+COUNTER1 .FILL #16
+BUSYVECTOR1 .FILL x6000
+FIRST_BIT_1 .FILL x8000
+BUSY1 .FILL #1
+FREE1 .FILL #0
+
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_ALL_MACHINES_FREE_3600
+; Input: (None)
+; Postcondition: The subroutine has returned a value indicating whether all machines are free
+; Return Value (R2): 1 if all machines are free, 0 otherwise 
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x3600
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_3600		; backup R0
+ ST R1, BACKUP_R1_3600		; backup R1
+ ST R3, BACKUP_R3_3600		; backup R3
+ ST R4, BACKUP_R4_3600		; backup R4
+ ST R5, BACKUP_R5_3600		; backup R5
+ ST R6, BACKUP_R6_3600		; backup R6
+ ST R7, BACKUP_R7_3600		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R1, BUSYVECTOR2		; load R1 with x6000
+
+LDR R3, R1, #0			; R3 <- m[R1] (R3 will hold the BUSYNESS)
+LD R4, FIRST_BIT_2		; load R4 with x8000
+LD R6, COUNTER2			; load R6 with #16
+
+CHECK_IF_FREE_LOOP
+ AND R5, R3, R4			; R5 <- R3 AND R4 (AND's R1 with R4 to see if it is x8000 or 0)
+ BRz SOME_MACHINE_BUSY		; if (R5 = 0) then SOME_MACHINE_BUSY
+ BRn LEFT_SHIFT_STILL_FREE	; if (R5 < 0) then LEFT_SHIFT_STILL_FREE
+
+LEFT_SHIFT_STILL_FREE
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_IF_FREE_LOOP		; if (R6 > 0) go to CHECK_IF_FREE_LOOP
+ BRz ALL_MACHINES_FREE		; if (R6 = 0) go to ALL_MACHINES_FREE
+
+SOME_MACHINE_BUSY
+ LD R2, BUSY2			; load R2 with #0 because NOT all machines are free
+ BRz END_ALL_FREE_CHECK		; END_ALL_FREE_CHECK
+
+ALL_MACHINES_FREE
+ LD R2, FREE2			; load R2 with #1 because all machines are free
+ BRp END_ALL_FREE_CHECK		; END_ALL_FREE_CHECK
+
+END_ALL_FREE_CHECK
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_3600		; restore R0
+ LD R1, BACKUP_R1_3600		; restore R1
+ LD R3, BACKUP_R3_3600		; restore R3
+ LD R4, BACKUP_R4_3600		; restore R4
+ LD R5, BACKUP_R5_3600		; restore R5
+ LD R6, BACKUP_R6_3600		; restore R6
+ LD R7, BACKUP_R7_3600		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_3600 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_3600 .BLKW #1
+BACKUP_R3_3600 .BLKW #1
+BACKUP_R4_3600 .BLKW #1
+BACKUP_R5_3600 .BLKW #1
+BACKUP_R6_3600 .BLKW #1
+BACKUP_R7_3600 .BLKW #1
+
+COUNTER2 .FILL #16
+BUSYVECTOR2 .FILL x6000
+FIRST_BIT_2 .FILL x8000
+BUSY2 .FILL #0
+FREE2 .FILL #1
+
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_NUM_BUSY_MACHINES_3800
+; Input: (None)
+; Postcondition: The subroutine has returned the number of busy machines
+; Return Value (R2): The number of machines that are busy
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x3800
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_3800		; backup R0
+ ST R1, BACKUP_R1_3800		; backup R1
+ ST R3, BACKUP_R3_3800		; backup R3
+ ST R4, BACKUP_R4_3800		; backup R4
+ ST R5, BACKUP_R5_3800		; backup R5
+ ST R6, BACKUP_R6_3800		; backup R6
+ ST R7, BACKUP_R7_3800		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R1, BUSYVECTOR3		; load R1 with x6000
+
+LDR R3, R1, #0			; R3 <- m[R1] (R3 will hold the BUSYNESS)
+LD R4, FIRST_BIT_3		; load R4 with x8000
+LD R6, COUNTER3			; load R6 with #16
+LD R2, NUM_BUSY			; load R2 with #0 to count how many busy
+
+CHECK_NUM_BUSY_LOOP
+ AND R5, R3, R4			; R5 <- R3 AND R4 (AND's R1 with R4 to see if it is x8000 or 0
+ ;BRn NOT_BUSY			; if (R5 < 0) then NOT_BUSY
+ BRz IS_BUSY			; if (R5 = 0) then IS_BUSY
+ ; if it's not busy, continue
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_NUM_BUSY_LOOP	; if (R6 > 0) go to CHECK_NUM_BUSY_LOOP
+ BRz END_NUM_BUSY_LOOP		; if (R6 = 0) go to END_NUM_BUSY_LOOP
+
+IS_BUSY
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R2, R2, #1			; increment number of busy by 1
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_NUM_BUSY_LOOP	; if (R6 > 0) go to CHECK_NUM_BUSY_LOOP
+ BRz END_NUM_BUSY_LOOP		; if (R6 = 0) go to END_NUM_BUSY_LOOP
+
+END_NUM_BUSY_LOOP
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_3800		; restore R0
+ LD R1, BACKUP_R1_3800		; restore R1
+ LD R3, BACKUP_R3_3800		; restore R3
+ LD R4, BACKUP_R4_3800		; restore R4
+ LD R5, BACKUP_R5_3800		; restore R5
+ LD R6, BACKUP_R6_3800		; restore R6
+ LD R7, BACKUP_R7_3800		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_3800 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_3800 .BLKW #1
+BACKUP_R3_3800 .BLKW #1
+BACKUP_R4_3800 .BLKW #1
+BACKUP_R5_3800 .BLKW #1
+BACKUP_R6_3800 .BLKW #1
+BACKUP_R7_3800 .BLKW #1
+
+COUNTER3 .FILL #16
+BUSYVECTOR3 .FILL x6000
+FIRST_BIT_3 .FILL x8000
+NUM_BUSY .FILL #0
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_NUM_FREE_MACHINES_4000
+; Input: (None)
+; Postcondition: The subroutine has returned the number of free machines
+; Return Value (R2): The number of machines that are free
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4000
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4000		; backup R0
+ ST R1, BACKUP_R1_4000		; backup R1
+ ST R3, BACKUP_R3_4000		; backup R3
+ ST R4, BACKUP_R4_4000		; backup R4
+ ST R5, BACKUP_R5_4000		; backup R5
+ ST R6, BACKUP_R6_4000		; backup R6
+ ST R7, BACKUP_R7_4000		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R1, BUSYVECTOR4		; load R1 with x6000
+
+LDR R3, R1, #0			; R3 <- m[R1] (R3 will hold the BUSYNESS)
+LD R4, FIRST_BIT_4		; load R4 with x8000
+LD R6, COUNTER4			; load R6 with #16
+LD R2, NUM_FREE			; load R2 with #0 to count how many busy
+
+CHECK_NUM_FREE_LOOP
+ AND R5, R3, R4			; R5 <- R3 AND R4 (AND's R1 with R4 to see if it is x8000 or 0
+ BRn IS_FREE			; if (R5 = 0) then IS_BUSY
+ ; if it's not busy, continue
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_NUM_FREE_LOOP	; if (R6 > 0) go to CHECK_NUM_FREE_LOOP
+ BRz END_NUM_FREE_LOOP		; if (R6 = 0) go to END_NUM_FREE_LOOP
+
+IS_FREE
+ ADD R3, R3, R3			; left shift R3 by adding to itself and then storing it back in R3
+ ADD R2, R2, #1			; increment number of busy by 1
+ ADD R6, R6, #-1		; decrement the 16 counter
+ BRp CHECK_NUM_FREE_LOOP	; if (R6 > 0) go to CHECK_NUM_FREE_LOOP
+ BRz END_NUM_FREE_LOOP		; if (R6 = 0) go to END_NUM_FREE_LOOP
+
+END_NUM_FREE_LOOP
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4000		; restore R0
+ LD R1, BACKUP_R1_4000		; restore R1
+ LD R3, BACKUP_R3_4000		; restore R3
+ LD R4, BACKUP_R4_4000		; restore R4
+ LD R5, BACKUP_R5_4000		; restore R5
+ LD R6, BACKUP_R6_4000		; restore R6
+ LD R7, BACKUP_R7_4000		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4000 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_4000 .BLKW #1
+BACKUP_R3_4000 .BLKW #1
+BACKUP_R4_4000 .BLKW #1
+BACKUP_R5_4000 .BLKW #1
+BACKUP_R6_4000 .BLKW #1
+BACKUP_R7_4000 .BLKW #1
+
+COUNTER4 .FILL #16
+BUSYVECTOR4 .FILL x6000
+FIRST_BIT_4 .FILL x8000
+NUM_FREE .FILL #0
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_MACHINE_STATUS_4200
+; Input (R1): Which machine to check
+; Postcondition: The subroutine has returned a value indicating whether the machine indicated by
+;		 (R1) is busy or not.
+; Return Value (R2): 0 if machine (R1) is busy, 1 if it is free
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4200
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4200		; backup R0
+ ST R1, BACKUP_R1_4200		; backup R1
+ ST R3, BACKUP_R3_4200		; backup R3
+ ST R4, BACKUP_R4_4200		; backup R4
+ ST R5, BACKUP_R5_4200		; backup R5
+ ST R6, BACKUP_R6_4200		; backup R6
+ ST R7, BACKUP_R7_4200		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R3, FIFTEEN			; load R3 with #15
+LD R4, BUSYVECTOR5		; load R4 with x6000
+LDR R4, R4, #0			; load R4 with the contents of x6000
+LD R5, FIRST_BIT_5		; load R5 with x8000
+
+; R1 holds the (n) or which machine to check
+NOT R1, R1			; make R1
+ADD R1, R1, #1			; negative
+
+ADD R3, R3, R1			; R3 <- R3 + R1 (this will give me the left shift amount
+BRz BUSY_OR_FREE		; if (R3 = 0) go directly to BUSY_OR_FREE
+
+; left-shift and then check the bit
+N_SHIFT_LOOP
+ ADD R4, R4, R4			; left-shift the bits
+ ADD R3, R3, #-1		; decrement the counter
+ BRp N_SHIFT_LOOP		; if (R3 > 0) then continue N_SHIFT_LOOP
+
+; now check the 1st bit of value in R4
+BUSY_OR_FREE
+ AND R4, R4, R5			; R4 <- R4 AND 45 (checks the MSB)
+ BRn DETERMINED_FREE		; if (R4 < 0) then DETERMINED_FREE
+ BRz DETERMINED_BUSY		; else (R4 = 0) then DETERMINED_BUSY
+
+DETERMINED_FREE
+ LD R2, FREE5			; load R2 with #1
+ BRp END_BUSY_OR_FREE		; will be p so END_BUSY_OR_FREE
+
+DETERMINED_BUSY
+ LD R2, BUSY5			; load R2 with #0
+ BRz END_BUSY_OR_FREE		; will be z so END_BUSY_OR_FREE
+
+END_BUSY_OR_FREE
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4200		; restore R0
+ LD R1, BACKUP_R1_4200		; restore R1
+ LD R3, BACKUP_R3_4200		; restore R3
+ LD R4, BACKUP_R4_4200		; restore R4
+ LD R5, BACKUP_R5_4200		; restore R5
+ LD R6, BACKUP_R6_4200		; restore R6
+ LD R7, BACKUP_R7_4200		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4200 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_4200 .BLKW #1
+BACKUP_R3_4200 .BLKW #1
+BACKUP_R4_4200 .BLKW #1
+BACKUP_R5_4200 .BLKW #1
+BACKUP_R6_4200 .BLKW #1
+BACKUP_R7_4200 .BLKW #1
+
+FIFTEEN .FILL #15
+BUSYVECTOR5.FILL x6000
+FIRST_BIT_5.FILL x8000
+BUSY5 .FILL #0
+FREE5.FILL #1
+;----------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_FIRST_FREE_4400
+; Input: (None)
+; Postcondition: The subroutine has returned a value indicating the lowest numbered free machine
+; Return Value (R2): The number of the free machine
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4400
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4400		; backup R0
+ ST R1, BACKUP_R1_4400		; backup R1
+ ST R3, BACKUP_R3_4400		; backup R3
+ ST R4, BACKUP_R4_4400		; backup R4
+ ST R5, BACKUP_R5_4400		; backup R5
+ ST R6, BACKUP_R6_4400		; backup R6
+ ST R7, BACKUP_R7_4400		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R2, EMPTY_R2			; load R2 with #0 to make sure it is empty
+LD R3, FIFTEEN2			; load R3 with #15
+LD R4, FIRST_BIT_6		; load R4 with x8000
+
+LD R1, BUSYVECTOR6		; load R1 with x6000
+LDR R1, R1, #0			; load R1 with contents of x6000
+BRz NO_LOWEST_FREE		; if (R1 = 0) then NO_LOWEST_FREE
+
+TRAVERSE_FOR_LOWEST_FREE
+ AND R5, R1, R4			; R5 <- R1 AND R4 (checks MSB)
+ BRn UPDATE_LOWEST_FREE		; if (R5 < 0) go to UPDATE_LOWEST_FREE
+ ADD R1, R1, R1			; left shift the bits
+ ADD R3, R3, #-1		; decrement the iterator
+ BRp TRAVERSE_FOR_LOWEST_FREE	; if (R3 > 0) TRAVERSE_FOR_LOWEST_FREE
+ BRz END_TRAVERSE_FOR_LOWEST_FREE	; if (R3 = 0) END_TRAVERSE_FOR_LOWEST_FREE
+
+UPDATE_LOWEST_FREE
+ ADD R3, R3, #-1		; decrement the iterator
+ ADD R2, R3, #0			; load R2 with the iterator in R3
+ ADD R1, R1, R1			; left shift the bits
+ ADD R3, R3, #0			; invoke NZP
+ BRp TRAVERSE_FOR_LOWEST_FREE	; if (R3 > 0) TRAVERSE_FOR_LOWEST_FREE
+ BRz END_TRAVERSE_FOR_LOWEST_FREE	; if (R3 = 0) END_TRAVERSE_FOR_LOWEST_FREE
+
+NO_LOWEST_FREE
+ LD R2, NONE_FREE		; load R2 with #-1
+
+END_TRAVERSE_FOR_LOWEST_FREE
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4400		; restore R0
+ LD R1, BACKUP_R1_4400		; restore R1
+ LD R3, BACKUP_R3_4400		; restore R3
+ LD R4, BACKUP_R4_4400		; restore R4
+ LD R5, BACKUP_R5_4400		; restore R5
+ LD R6, BACKUP_R6_4400		; restore R6
+ LD R7, BACKUP_R7_4400		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4400 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_4400 .BLKW #1
+BACKUP_R3_4400 .BLKW #1
+BACKUP_R4_4400 .BLKW #1
+BACKUP_R5_4400 .BLKW #1
+BACKUP_R6_4400 .BLKW #1
+BACKUP_R7_4400 .BLKW #1
+
+NONE_FREE .FILL #-1
+EMPTY_R2 .FILL #0
+FIFTEEN2 .FILL #16
+BUSYVECTOR6.FILL x6000
+FIRST_BIT_6.FILL x8000
+;----------------------------------------------------------------------------------------------------
+
+
+
+
+
+; THIS SUBROUTINE IS USED TO PRINT THE CHARACTERS FOR OPTION 3 and 4!!!!!!!!!!
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_PRINT_CHAR_4600
+; Input (R2): Some value stored in R2 to print as decimal
+; Postcondition: Print out the number stored in R2 as it's character equivalent
+; Return Value: (none)
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4600
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4600		; backup R0
+ ST R1, BACKUP_R1_4600		; backup R1
+ ST R3, BACKUP_R3_4600		; backup R3
+ ST R4, BACKUP_R4_4600		; backup R4
+ ST R5, BACKUP_R5_4600		; backup R5
+ ST R6, BACKUP_R6_4600		; backup R6
+ ST R7, BACKUP_R7_4600		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R0, PRINT_COUNTER
+LD R1, NEG_TEN
+LD R3, CHAR_MASK
+
+
+CHAR_PRINT_LOOP_4
+ ADD R2, R2, R1
+ BRn PRINT_4TH
+ ADD R0, R0, #1
+ BRp CHAR_PRINT_LOOP_4
+
+
+PRINT_4TH
+ LD R1, POS_TEN
+ ADD R2, R2, R1			; reload back to original
+ ADD R0, R0, R3
+ OUT				; print R0
+ LD R0, PRINT_COUNTER		; reload the counter
+
+LD R1, NEG_ONE
+
+CHAR_PRINT_LOOP_5
+ ADD R2, R2, R1
+ BRn PRINT_5TH
+ ADD R0, R0, #1
+ BRp CHAR_PRINT_LOOP_5
+
+PRINT_5TH
+ LD R1, POS_ONE
+ ADD R2, R2, R1			; reload back to original
+ ADD R0, R0, R3
+ OUT				; print R0
+ LD R0, PRINT_COUNTER		; reload the counter
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4600		; restore R0
+ LD R1, BACKUP_R1_4600		; restore R1
+ LD R3, BACKUP_R3_4600		; restore R3
+ LD R4, BACKUP_R4_4600		; restore R4
+ LD R5, BACKUP_R5_4600		; restore R5
+ LD R6, BACKUP_R6_4600		; restore R6
+ LD R7, BACKUP_R7_4600		; restore R7
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4600 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_4600 .BLKW #1
+BACKUP_R3_4600 .BLKW #1
+BACKUP_R4_4600 .BLKW #1
+BACKUP_R5_4600 .BLKW #1
+BACKUP_R6_4600 .BLKW #1
+BACKUP_R7_4600 .BLKW #1
+
+PRINT_COUNTER .FILL #0
+NEG_TEN .FILL #-10
+NEG_ONE .FILL #-1
+POS_TEN .FILL #10
+POS_ONE .FILL #1
+CHAR_MASK .FILL #48
+;------------------------------------------------------------------------------------------------
+
+; THIS SUBROUTINE GETS INPUT (n) FOR OPTION5!!!!
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_GET_N_4800
+; Input: (None)
+; Postcondition: The subroutine has obtained an n value from the user
+; Return Value (R1): The option selected: (0-15)
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4800
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4800		; backup R0
+ ST R2, BACKUP_R2_4800		; backup R2
+ ST R3, BACKUP_R3_4800		; backup R3
+ ST R4, BACKUP_R4_4800		; backup R4
+ ST R5, BACKUP_R5_4800		; backup R5
+ ST R6, BACKUP_R6_4800		; backup R6
+ ST R7, BACKUP_R7_4800		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LEA R0, PROMPT_N	; load R0 with 1st address of PROMPT_N
+PUTS			; output PROMPT_N
+
+
+LD R1, ZERO		; don't use R1 because it is the return value
+LD R3, NEGATIVE_1	; R3 holds -1 which is a counter
+LD R4, CHAR_TO_NUM2	; converting mask #-48 to convert the characters
+	
+; DO NOT IMPLEMENT ERROR CHECK!!!!!!!
+
+
+;This FOR_LOOP takes in input from the user
+FOR_LOOP
+ GETC			; Get a character from the user and store it into R0
+ OUT
+
+ ST R0, VAL_R0		; first store the value of R0 into a label
+ 
+ ;if you subtract 10 and the value is zero end the for loop
+ LD R0, VAL_R0		; load R0 with VAL_R0
+ ADD R0, R0, #-10	; R0 <-- R0 - 10
+ BRz END_FOR_LOOP	; if (R0 = 0) go to END_FOR_LOOP because user entered ENTER
+
+ ;otherwise normally continue the program and load VAL_R0 back into R0
+ LD R0, VAL_R0		; load R0 with VAL_R0
+ ADD R0, R0, R4		; R0 <- R0 + R4 (converts it to decimal) 
+
+ LD R2, NINE		; loads R2 with the number nine
+ ADD R3, R3, #1		; increments the counter from -1 to 0 (start), etc.
+ BRp CONVERTER		; if (R3 > 0) then go to the converter
+
+ ;otherwise put R0 into R1 for initial (IT WILL ONLY GO TO THESE TWO STATEMENTS ONCE)
+ ADD R1, R1, R0		; puts R0 into R1
+ BRzp SKIP		; if (R1 >= 0) 
+
+ CONVERTER
+  ST R1, VAL_R1		; store the value of R1 into VAL_R1
+  LD R6, VAL_R1		; load R6 with VAL_R1
+
+  ; multiplies the number in R1 and then appends the entered value in R0
+  MULTIPLY_BY_10
+   ADD R1, R1, R6	; R1 <- R1 + R6 (adds original value of R1)
+   ADD R2, R2, #-1 	; R2 with 9 only want to add it to itself 9 times
+   BRp MULTIPLY_BY_10	; if (R2 > 0) go to MULTIPLY_BY_10
+   ADD R1, R1, R0	; R1 <- R1 + R0 (appends R0 to the multiplied value of R1
+ END_CONVERTER
+
+ SKIP
+ 
+ REST_OF_PROG
+  LD R0, VAL_R0		; load R0 with VAL_R0
+  ADD R0, R0, #-10	; R0 <-- R0 - 10
+  BRp FOR_LOOP		; if (R0 > 0) go to FOR_LOOP
+END_FOR_LOOP
+
+
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4800		; restore R0
+ LD R2, BACKUP_R2_4800		; restore R2
+ LD R3, BACKUP_R3_4800		; restore R3
+ LD R4, BACKUP_R4_4800		; restore R4
+ LD R5, BACKUP_R5_4800		; restore R5
+ LD R6, BACKUP_R6_4800		; restore R6
+ LD R7, BACKUP_R7_4800		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4800 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R2_4800 .BLKW #1
+BACKUP_R3_4800 .BLKW #1
+BACKUP_R4_4800 .BLKW #1
+BACKUP_R5_4800 .BLKW #1
+BACKUP_R6_4800 .BLKW #1
+BACKUP_R7_4800 .BLKW #1
+
+ZERO .FILL #0
+NEGATIVE_1 .FILL #-1
+NINE .FILL #9
+VAL_R0 .FILL #0
+VAL_R1 .FILL #0
+
+CHAR_TO_NUM2 .FILL #-48
+NEWLINE3 .FILL #10
+VALIDATION3 .FILL #-49
+VALIDATION4 .FILL #-55
+FAILED_INPUT2 .STRINGZ "The number you entered was invalid!!!"
+PROMPT_N .STRINGZ "Which machine do you want the status of (0-15): "
+
+;----------------------------------------------------------------------------------------------------
+
+; THIS SUBROUTINE PRINTS THE (n) FOR OPTION5!!!
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_PRINT_CHAR_5000
+; Input (R1): Some value stored in R1 to print as decimal
+; Postcondition: Print out the number stored in R1 as it's character equivalent
+; Return Value: (none)
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x5000
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_5000		; backup R0
+ ST R2, BACKUP_R2_5000		; backup R2
+ ST R3, BACKUP_R3_5000		; backup R3
+ ST R4, BACKUP_R4_5000		; backup R4
+ ST R5, BACKUP_R5_5000		; backup R5
+ ST R6, BACKUP_R6_5000		; backup R6
+ ST R7, BACKUP_R7_5000		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+LD R0, PRINT_COUNTER2
+LD R2, NEG_TEN2
+LD R3, CHAR_MASK2
+
+
+CHAR_PRINT_LOOP_1
+ ADD R1, R1, R2
+ BRn PRINT_6TH
+ ADD R0, R0, #1
+ BRp CHAR_PRINT_LOOP_1
+
+
+PRINT_6TH
+ LD R2, POS_TEN2
+ ADD R1, R1, R2			; reload back to original
+ ADD R0, R0, R3
+ OUT				; print R0
+ LD R0, PRINT_COUNTER2		; reload the counter
+
+LD R2, NEG_ONE2
+
+CHAR_PRINT_LOOP_2
+ ADD R1, R1, R2
+ BRn PRINT_7TH
+ ADD R0, R0, #1
+ BRp CHAR_PRINT_LOOP_2
+
+PRINT_7TH
+ LD R2, POS_ONE2
+ ADD R1, R1, R2			; reload back to original
+ ADD R0, R0, R3
+ OUT				; print R0
+ LD R0, PRINT_COUNTER2		; reload the counter
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_5000		; restore R0
+ LD R2, BACKUP_R2_5000		; restore R2
+ LD R3, BACKUP_R3_5000		; restore R3
+ LD R4, BACKUP_R4_5000		; restore R4
+ LD R5, BACKUP_R5_5000		; restore R5
+ LD R6, BACKUP_R6_5000		; restore R6
+ LD R7, BACKUP_R7_5000		; restore R7
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_5000 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R2_5000 .BLKW #1
+BACKUP_R3_5000 .BLKW #1
+BACKUP_R4_5000 .BLKW #1
+BACKUP_R5_5000 .BLKW #1
+BACKUP_R6_5000 .BLKW #1
+BACKUP_R7_5000 .BLKW #1
+
+PRINT_COUNTER2 .FILL #0
+NEG_TEN2 .FILL #-10
+NEG_ONE2 .FILL #-1
+POS_TEN2 .FILL #10
+POS_ONE2 .FILL #1
+CHAR_MASK2 .FILL #48
+;------------------------------------------------------------------------------------------------
+
+
+
+
+
+.ORIG x5800
+STARS .STRINGZ "***********************"
+TITLE .STRINGZ "* The Busyness Server *"
+STARS2 .STRINGZ "***********************"
+OPTION1 .STRINGZ "1. Check to see if all machines are busy"
+OPTION2 .STRINGZ "2. Check to see if all machines are free"
+OPTION3 .STRINGZ "3. Report the number of busy machines"
+OPTION4 .STRINGZ "4. Report the number of free machines"
+OPTION5 .STRINGZ "5. Report the status of machine n"
+OPTION6 .STRINGZ "6. Report the number of the first available machine"
+OPTION7 .STRINGZ "7. Quit"
+TERMINATE .FILL #-1
+
+;----------------------------------------------------------------------------------------------------
+.ORIG x6000
+BUSYNESS .FILL xF26B
+
+.END

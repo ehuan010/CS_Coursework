@@ -1,0 +1,159 @@
+;=================================================
+;
+; Name: <Huang, Edward>
+; Login id: ehuan010 (861026626)
+;
+; Assignment name: <assn 4>
+; Lab section: <024>
+; TA: Muzo Akbay
+;
+; I hereby certify that the contents of this file
+; are ENTIRELY my own original work.
+;
+;=================================================
+
+.ORIG x3000		;Program begins here
+;------------------
+; Instructions
+;------------------
+
+LD R1, ZERO
+LD R2, DATA_PTR		; R2 <-- m[DATA_PTR] = x4000
+LD R3, COUNTER		; R3 <-- m[COUNTER] = #0
+
+LEA R0, PROMPT		; STORES ADDRESS OF THE PROMPT
+PUTS			; outputs the PROMPT
+
+
+;This FOR_LOOP takes in input from the user
+FOR_LOOP
+ GETC			; Get a character from the user and store it into R0
+ OUT
+ STR R0, R2, #0		; m[R2] <-- R0
+ ADD R2, R2, #1		; R1 <-- R1 + 1 (increments to the next address x4001..etc)
+ ADD R3, R3, #1		; R3 <-- R3 + 1 (adds 1 to the counter to determine size)
+ ST R3, COUNTER		; m[COUNTER] <-- R3
+ ADD R0, R0, #-10	; R0 <-- R0 - 10
+ BRp FOR_LOOP		; if(R0 > 0)
+ ;Need another branch for if it exceeds the 6 available slots?
+END_FOR_LOOP
+
+
+;CHECKING THE FIRST CHARACTER FOR + or -
+LD R2, DATA_PTR		; R2 <-- m[DATA_PTR] = x4000
+LDR R5, R2, #0		; R5 <-- m[R2] = m[x4000] = + or - sign
+LD R6, P_N_CHECK
+
+ADD R5, R5, R6		; + is #43 and - is #45...R5 should now negative or 0
+BRz CHAR_IS_N		; if (R5 = 0) the character must be negative
+
+CHAR_IS_P		; the character must be +
+ LD R5, ZERO		; R5 <-- m[ZERO] = #0
+ ST R5, VAL_R5
+ BRz LOOP_2
+
+CHAR_IS_N		; the character must be -
+ LD R5, NEGATIVE_1	; R5 <-- m[NEGATIVE_1] = #-1
+ ST R5, VAL_R5
+ BRn LOOP_2
+
+;--------------------------------------------------------------------------------------------
+;After checking 1st char, continue checking the rest of the array
+LOOP_2
+ ADD R3, R3, #-2	; R3 <- R3 -2 (this accounts for the offset of the loop)
+ ST R3, COUNTER		; m[COUNTER] <- R3 (update counter to correct amount)
+ LD R3, COUNTER		; R3 <- m[COUNTER]
+ ADD R2, R2, R3		; R2 <-- R2 + R3 (goes to the end of the array)
+ ;R2 holds the address of the end of the array
+ LEA R6, RETURN_POINT
+ JMP R6
+
+;This makes the program loop through the rest of array
+FOR_LOOP_4
+ ADD R2, R2, #-1	; (goes back an address)
+ LD R3, COUNTER
+ ADD R3, R3, #-1
+ ST R3, COUNTER
+ BRz END_PROGRAM
+ LEA R6, RETURN_POINT
+ JMP R6
+
+ END_PROGRAM
+  LD R5, VAL_R5
+  BRn IS_NEGATIVE
+  HALT
+  IS_NEGATIVE
+   NOT R1, R1
+   ADD R1, R1, #1
+  HALT
+;--------------------------------------------------------------------------------------------
+RETURN_POINT
+
+LOOP_3
+ LDR R0, R2, #0		; R0 <- m[R2] (place value of R2 into R0...end of array)
+ LD R6, MASK
+ ADD R0, R0, R6
+ ST R0, NUM_AT_INDEX	; m[NUM_AT_INDEX] <- R0
+ ;Don't change R1, R2, R5
+ LD R6, BASE_10		; R6 <- m[BASE_10] = 10 (To store the base tens)
+ LD R3, NINE		; R3 <- m[NINE] = 9 (to add the number 9 times)
+ 
+ ;LD R6, ONE		; R6 <- m[BASE_10] = 10 (To store the base tens)
+ ;LD R3, ONE		; R3 <- m[NINE] = 9 (to add the number 9 times)
+
+
+;THIS NEEDS TO BE DONE USING JMP SO I CAN LOOP OVER AND OVER AFTER GOING TO NEXT REGISTER
+ TEN_LOOP
+ LD R4, BASE_10
+
+ ;LD R4, ZERO
+
+ ADD R6, R6, R4		; R4 <- R6 + 10 (adds 10 each time)
+ ADD R3, R3, #-1	; R3 <- R3 - 1 (decrements it so it only does it nine times)
+ BRp TEN_LOOP		
+ 
+ ;LD R6, TEN
+ ;ST R6, ONE ;becomes 10
+ 
+ 
+ 
+ ;UPDATE ALL THE VALUES
+ ST R6, BASE_10		; m[BASE_10] <- R6 (updates base_10 to next value)
+ ;LD R3, NINE
+ LD R6, BASE_10
+ ADD R6, R6, #-1	; takes into account offset
+
+ LD R3, NUM_AT_INDEX
+
+;THIS IS THE NUMBER STORED TIMES THE BASE TEN NUMBER
+ NUM_TIMES_BASE_TEN
+  ADD R0, R0, R3
+  ADD R6, R6, #-1
+  BRp NUM_TIMES_BASE_TEN
+ 
+ ADD R1, R1, R0
+ LEA R6, FOR_LOOP_4
+ JMP R6
+
+
+;----------
+; Data
+;----------
+DATA_PTR .FILL x4000
+MASK .FILL #-48
+ZERO .FILL #0
+NEGATIVE_1 .FILL #-1
+P_N_CHECK .FILL #-45
+COUNTER .FILL #0
+NINE .FILL #9
+TEN .FILL #10
+ONE .FILL #1
+BASE_10 .FILL #10
+NUM_AT_INDEX .FILL #0
+VAL_R5 .FILL #0
+PROMPT .STRINGZ "Input a decimal number (max 5 digits), preceded with +/‐, followed by ENTER key on keyboard: "
+
+.ORIG x4000
+ARRAY .BLKW #6
+
+.END

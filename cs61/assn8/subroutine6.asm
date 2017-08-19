@@ -1,0 +1,107 @@
+;------------
+; Main Code
+;------------
+.ORIG x3000
+
+LD R1, NUM
+LD R7, SUB_FIRST_FREE_4400		;load R7 with (SUB_MENU_3200)
+JSRR R7					; jump to SUB_MENU_3200
+
+HALT				; halts the program
+
+;--------------------
+; Data Block for main
+;--------------------
+SUB_FIRST_FREE_4400 .FILL x4400
+NUM .FILL #1
+
+
+;----------------------------------------------------------------------------------------------------
+; Subroutine: SUB_FIRST_FREE_4400
+; Input: (None)
+; Postcondition: The subroutine has returned a value indicating the lowest numbered free machine
+; Return Value (R2): The number of the free machine
+;----------------------------------------------------------------------------------------------------
+
+.ORIG x4400
+
+;-------------------------
+; Instruction Block
+;-------------------------
+; (1) Backup all modified registers except Return Values
+ ST R0, BACKUP_R0_4400		; backup R0
+ ST R1, BACKUP_R1_4400		; backup R1
+ ST R3, BACKUP_R3_4400		; backup R3
+ ST R4, BACKUP_R4_4400		; backup R4
+ ST R5, BACKUP_R5_4400		; backup R5
+ ST R6, BACKUP_R6_4400		; backup R6
+ ST R7, BACKUP_R7_4400		; backup R7
+
+; (2) Perform whatever algorithm(s) this subroutine is suppose to perform
+
+
+LD R2, EMPTY_R2			; load R2 with #0 to make sure it is empty
+LD R3, FIFTEEN2			; load R3 with #15
+LD R4, FIRST_BIT_6		; load R4 with x8000
+
+LD R1, BUSYVECTOR6		; load R1 with x6000
+LDR R1, R1, #0			; load R1 with contents of x6000
+BRz NO_LOWEST_FREE		; if (R1 = 0) then NO_LOWEST_FREE
+
+TRAVERSE_FOR_LOWEST_FREE
+ AND R5, R1, R4			; R5 <- R1 AND R4 (checks MSB)
+ BRn UPDATE_LOWEST_FREE		; if (R5 < 0) go to UPDATE_LOWEST_FREE
+ ADD R1, R1, R1			; left shift the bits
+ ADD R3, R3, #-1		; decrement the iterator
+ BRp TRAVERSE_FOR_LOWEST_FREE	; if (R3 > 0) TRAVERSE_FOR_LOWEST_FREE
+ BRz END_TRAVERSE_FOR_LOWEST_FREE	; if (R3 = 0) END_TRAVERSE_FOR_LOWEST_FREE
+
+UPDATE_LOWEST_FREE
+ ADD R2, R3, #0			; load R2 with the iterator in R3
+ ADD R1, R1, R1			; left shift the bits
+ ADD R3, R3, #-1		; decrement the iterator
+ BRp TRAVERSE_FOR_LOWEST_FREE	; if (R3 > 0) TRAVERSE_FOR_LOWEST_FREE
+ BRz END_TRAVERSE_FOR_LOWEST_FREE	; if (R3 = 0) END_TRAVERSE_FOR_LOWEST_FREE
+
+NO_LOWEST_FREE
+ LD R2, NONE_FREE		; load R2 with #-1
+
+END_TRAVERSE_FOR_LOWEST_FREE
+
+
+; (3) Restore all modified registers except Return Values
+ LD R0, BACKUP_R0_4400		; restore R0
+ LD R1, BACKUP_R1_4400		; restore R1
+ LD R3, BACKUP_R3_4400		; restore R3
+ LD R4, BACKUP_R4_4400		; restore R4
+ LD R5, BACKUP_R5_4400		; restore R5
+ LD R6, BACKUP_R6_4400		; restore R6
+ LD R7, BACKUP_R7_4400		; restore R7
+
+; (4) Return to where you came from
+RET				; jump to (R7)
+
+;-------------------------
+; Data Block
+;-------------------------
+BACKUP_R0_4400 .BLKW #1 	;one for each register modified (except return val)
+BACKUP_R1_4400 .BLKW #1
+BACKUP_R3_4400 .BLKW #1
+BACKUP_R4_4400 .BLKW #1
+BACKUP_R5_4400 .BLKW #1
+BACKUP_R6_4400 .BLKW #1
+BACKUP_R7_4400 .BLKW #1
+
+NONE_FREE .FILL #-1
+EMPTY_R2 .FILL #0
+FIFTEEN2 .FILL #15
+BUSYVECTOR6.FILL x6000
+FIRST_BIT_6.FILL x8000
+;----------------------------------------------------------------------------------------------------
+
+
+
+.ORIG x6000
+BUSYNESS .FILL x0000
+
+.END

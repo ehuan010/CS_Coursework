@@ -1,0 +1,27 @@
+;-----------------------------------------------------------------------------------
+; Huang, Edward
+; 861-02-6626
+; Login: ehuan010
+; Section: 24
+; TA: Muzo Akbay
+; Email: ehuan010@student.ucr.edu
+; Lab 01
+;-----------------------------------------------------------------------------------
+
+		;; hello world program
+
+		.ORIG x3000
+
+		LEA R0, message  ; store address of start of message in R0
+		PUTS             ; Invokes BIOS routine to output string
+		HALT             ; terminates program execution
+
+		;; end of code
+
+		;; data block
+
+message         .STRINGZ "Hello World!!\n"
+			         ; store 'H' in address lablled "message"
+				 ; and then one character per memory address
+
+		.END	         ; tells assembler to stop reading & assembling
